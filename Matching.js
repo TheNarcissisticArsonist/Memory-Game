@@ -69,5 +69,32 @@ var board = {
   rc85: 0,
   rc86: 0,
   rc87: 0,
-  rc88: 0,
+  rc88: 0
 }
+
+function randomOrder() {
+  var ordered = [];
+  var num = Math.floor(Math.random() * 64 + 1);
+  var used = false;
+  ordered.push(num);
+  while(ordered.length < 64) {
+    num = Math.floor(Math.random() * 64 + 1);
+    for(i=0; i<ordered.length; i++) {
+      if(ordered[i] == num) {
+        used = true;
+      }
+    }
+    if(!used) {
+      ordered.push(num);
+    }
+    used = false;
+  }
+  return ordered;
+}
+
+function assignValues() {
+  var order = randomOrder();
+  alert(order);
+}
+
+assignValues();
