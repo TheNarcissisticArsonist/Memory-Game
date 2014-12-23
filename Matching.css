@@ -1,0 +1,8 @@
+div.cell {
+  display: inline-block;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  background-color: #dddddd;
+  margin: 2px 0px;
+}
