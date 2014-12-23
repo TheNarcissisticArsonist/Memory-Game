@@ -94,7 +94,24 @@ function randomOrder() {
 
 function assignValues() {
   var order = randomOrder();
-  alert(order);
 }
 
-assignValues();
+function convertToRC(convert) {
+  var r = 1;
+  var c = 1;
+  var rc;
+  for(i=0; i<convert.length; i++) {
+    rc = "rc" + String(r) + String(c);
+    board[rc] = convert[i];
+    if(c == 8) {
+      r++;
+      c = 1;
+    }
+    else {
+      c++;
+    }
+  }
+  console.log(board);
+}
+
+convertToRC(randomOrder());
