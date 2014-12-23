@@ -92,10 +92,6 @@ function randomOrder() {
   return ordered;
 }
 
-function assignValues() {
-  var order = randomOrder();
-}
-
 function convertToRC(convert) {
   var r = 1;
   var c = 1;
@@ -114,4 +110,20 @@ function convertToRC(convert) {
   console.log(board);
 }
 
-convertToRC(randomOrder());
+function assignValues() {
+  convertToRC(randomOrder());
+}
+
+function displayOnBoard() {
+  //For testing and debugging
+  var rc;
+  for(i=1; i<=8; i++) {
+    for(j=1; j<=8; j++) {
+      rc = "r" + "c" + String(i) + String(j);
+      $("#" + rc).html("<p>" + String(board[rc]) + "</p>");
+    }
+  }
+}
+
+assignValues();
+displayOnBoard();
