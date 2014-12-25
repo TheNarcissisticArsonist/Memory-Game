@@ -232,15 +232,5 @@ $("#newGame").click(function() {
 });
 
 $(".box").click(function() {
-  var rc = $(this).attr("id");
-  if(!selected[rc] && !pickTwo) {
-    selected[rc] = true;
-    pickTwo = true;
-  }
-  else if(!selected[rc] && pickTwo) {
-    selected[rc] = true;
-    if(testCombine()) {
-      combine();
-    }
-  }
+  
 });
