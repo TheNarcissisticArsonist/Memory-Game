@@ -212,8 +212,14 @@ function testCombine() {
       }
     }
   }
-  alert(toCombine);
-  console.log(selected);
+  if(toCombine.length == 2) {
+    var rc1 = board[toCombine[0]];
+    var rc2 = board[toCombine[1]];
+    if(rc1 == rc2) {
+      return true;
+    }
+  }
+  return false;
 }
 function combine() {
 
@@ -225,7 +231,7 @@ $("#newGame").click(function() {
   displayOnBoard();
 });
 
-/*$(".box").click(function() {
+$(".box").click(function() {
   var rc = $(this).attr("id");
   if(!selected[rc] && !pickTwo) {
     selected[rc] = true;
@@ -238,8 +244,3 @@ $("#newGame").click(function() {
     }
   }
 });
-*/
-
-selected["rc11"] = true;
-selected["rc12"] = true;
-testCombine();
