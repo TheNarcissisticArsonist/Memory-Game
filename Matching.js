@@ -144,6 +144,79 @@ var selected = {
   rc87: false,
   rc88: false
 }
+var matched = {
+  rc11: false,
+  rc12: false,
+  rc13: false,
+  rc14: false,
+  rc15: false,
+  rc16: false,
+  rc17: false,
+  rc18: false,
+
+  rc21: false,
+  rc22: false,
+  rc23: false,
+  rc24: false,
+  rc25: false,
+  rc26: false,
+  rc27: false,
+  rc28: false,
+
+  rc31: false,
+  rc32: false,
+  rc33: false,
+  rc34: false,
+  rc35: false,
+  rc36: false,
+  rc37: false,
+  rc38: false,
+
+  rc41: false,
+  rc42: false,
+  rc43: false,
+  rc44: false,
+  rc45: false,
+  rc46: false,
+  rc47: false,
+  rc48: false,
+
+  rc51: false,
+  rc52: false,
+  rc53: false,
+  rc54: false,
+  rc55: false,
+  rc56: false,
+  rc57: false,
+  rc58: false,
+
+  rc61: false,
+  rc62: false,
+  rc63: false,
+  rc64: false,
+  rc65: false,
+  rc66: false,
+  rc67: false,
+  rc68: false,
+
+  rc71: false,
+  rc72: false,
+  rc73: false,
+  rc74: false,
+  rc75: false,
+  rc76: false,
+  rc77: false,
+  rc78: false,
+
+  rc81: false,
+  rc82: false,
+  rc83: false,
+  rc84: false,
+  rc85: false,
+  rc86: false,
+  rc87: false,
+  rc88: false
+}
 var toCombine = [];
 var isSelect = [];
 
@@ -180,6 +253,7 @@ function convertToRC(convert) {
     else {
       c++;
     }
+    matched[rc] = false;
   }
   console.log(board);
 }
@@ -190,6 +264,14 @@ function displayOnBoard() {
     for(j=1; j<=8; j++) {
       rc = "r" + "c" + String(i) + String(j);
       $("#" + rc).html("<p>" + String(board[rc]) + "</p>");
+      if(matched[rc]) {
+        $("#" + rc).css("background-color", "#000000");
+        $("#" + rc + " p").css("color", "#ffffff");
+      }
+      else {
+        $("#" + rc).css("background-color", "#dddddd");
+        $("#" + rc + " p").css("color", "#000000");
+      }
     }
   }
 }
@@ -214,18 +296,24 @@ function testCombine() {
   }
   var rc1 = board[toCombine[0]];
   var rc2 = board[toCombine[1]];
-  selected[toCombine[0]] = false;
-  selected[toCombine[1]] = false;
-  toCombine = [];
   if(rc1 == rc2) {
+    $("#" + toCombine[0]).css("background-color", "#000000");
+    $("#" + toCombine[1]).css("background-color", "#000000");
+    $("#" + toCombine[0] + " p").css("color", "#ffffff");
+    $("#" + toCombine[1] + " p").css("color", "#ffffff");
+    matched[toCombine[0]] = true;
+    matched[toCombine[1]] = true;
+    selected[toCombine[0]] = false;
+    selected[toCombine[1]] = false;
+    toCombine = [];
     return true;
   }
   else {
+    selected[toCombine[0]] = false;
+    selected[toCombine[1]] = false;
+    toCombine = [];
     return false;
   }
-}
-function combine() {
-
 }
 
 $("#newGame").click(function() {
@@ -236,6 +324,9 @@ $("#newGame").click(function() {
 
 $(".box").click(function() {
   var clicked = $(this).attr("id");
+  if(matched[clicked]) {
+    return;
+  }
   if(isSelect.length == 0) {
     isSelect.push(clicked);
     selected[clicked] = true;
@@ -251,7 +342,7 @@ $(".box").click(function() {
     else {
 
       alert("Not Match");
-      
+
     }
   }
   else if(isSelect.length == 2) {
