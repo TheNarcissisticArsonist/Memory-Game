@@ -219,6 +219,7 @@ var matched = {
 }
 var toCombine = [];
 var isSelect = [];
+var finished = true;
 
 function randomOrder() {
   var ordered = [];
@@ -285,34 +286,77 @@ function pairValues() {
   }
 }
 function testCombine() {
-  var rc;
-  for(i=1; i<=8; i++) {
-    for(j=1; j<=8; j++) {
-      rc = "rc" + String(i) + String(j);
-      if(selected[rc]) {
-        toCombine.push(rc);
+  if(finished) {
+    finished = false;
+    setTimeout(function() {
+      var rc;
+      for(i=1; i<=8; i++) {
+        for(j=1; j<=8; j++) {
+          rc = "rc" + String(i) + String(j);
+          if(selected[rc]) {
+            toCombine.push(rc);
+          }
+        }
       }
-    }
-  }
-  var rc1 = board[toCombine[0]];
-  var rc2 = board[toCombine[1]];
-  if(rc1 == rc2) {
-    $("#" + toCombine[0]).css("background-color", "#000000");
-    $("#" + toCombine[1]).css("background-color", "#000000");
-    $("#" + toCombine[0] + " p").css("color", "#ffffff");
-    $("#" + toCombine[1] + " p").css("color", "#ffffff");
-    matched[toCombine[0]] = true;
-    matched[toCombine[1]] = true;
-    selected[toCombine[0]] = false;
-    selected[toCombine[1]] = false;
-    toCombine = [];
-    return true;
+      var rc1 = board[toCombine[0]];
+      var rc2 = board[toCombine[1]];
+      if(rc1 == rc2) {
+        $("#" + toCombine[0]).css("background-color", "#000000");
+        $("#" + toCombine[1]).css("background-color", "#000000");
+        $("#" + toCombine[0] + " p").css("color", "#ffffff");
+        $("#" + toCombine[1] + " p").css("color", "#ffffff");
+        matched[toCombine[0]] = true;
+        matched[toCombine[1]] = true;
+        selected[toCombine[0]] = false;
+        selected[toCombine[1]] = false;
+        toCombine = [];
+        return true;
+      }
+      else {
+        $("#" + toCombine[0]).css("background-color", "#dddddd");
+        $("#" + toCombine[1]).css("background-color", "#dddddd");
+        selected[toCombine[0]] = false;
+        selected[toCombine[1]] = false;
+        toCombine = [];
+        return false;
+      }
+      finished = true;
+    }, 100);
   }
   else {
-    selected[toCombine[0]] = false;
-    selected[toCombine[1]] = false;
-    toCombine = [];
-    return false;
+    var rc;
+    for(i=1; i<=8; i++) {
+      for(j=1; j<=8; j++) {
+        rc = "rc" + String(i) + String(j);
+        if(selected[rc]) {
+          toCombine.push(rc);
+        }
+      }
+    }
+    var rc1 = board[toCombine[0]];
+    var rc2 = board[toCombine[1]];
+    if(rc1 == rc2) {
+      $("#" + toCombine[0]).css("background-color", "#000000");
+      $("#" + toCombine[1]).css("background-color", "#000000");
+      $("#" + toCombine[0] + " p").css("color", "#ffffff");
+      $("#" + toCombine[1] + " p").css("color", "#ffffff");
+      matched[toCombine[0]] = true;
+      matched[toCombine[1]] = true;
+      selected[toCombine[0]] = false;
+      selected[toCombine[1]] = false;
+      toCombine = [];
+      finished = true;
+      return true;
+    }
+    else {
+      $("#" + toCombine[0]).css("background-color", "#dddddd");
+      $("#" + toCombine[1]).css("background-color", "#dddddd");
+      selected[toCombine[0]] = false;
+      selected[toCombine[1]] = false;
+      toCombine = [];
+      finished = true;
+      return false;
+    }
   }
 }
 
@@ -327,6 +371,7 @@ $(".box").click(function() {
   if(matched[clicked]) {
     return;
   }
+  $("#" + clicked).css("background-color", "#9999ff");
   if(isSelect.length == 0) {
     isSelect.push(clicked);
     selected[clicked] = true;
@@ -335,14 +380,10 @@ $(".box").click(function() {
     isSelect.push(clicked);
     selected[clicked] = true;
     if(testCombine()) {
-
-      //alert("Match");
-
+      //Can do stuff based on whether it was a match or not
     }
     else {
-
-      //alert("Not Match");
-
+      //Can do stuff based on whether it was a match or not
     }
   }
   else if(isSelect.length == 2) {
