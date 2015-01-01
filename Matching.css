@@ -6,6 +6,10 @@ div.box {
   background-color: #dddddd;
   margin: 2px 0px;
 }
+div.box p {
+  padding: 6px 0px;
+}
+
 div#newGame {
   background-color: #9999ff;
   width: 100px;
