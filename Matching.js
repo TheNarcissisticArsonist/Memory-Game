@@ -145,6 +145,7 @@ var selected = {
   rc88: false
 }
 var toCombine = [];
+var isSelect = [];
 
 function randomOrder() {
   var ordered = [];
@@ -211,15 +212,16 @@ function testCombine() {
       }
     }
   }
-  if(toCombine.length == 2) {
-    var rc1 = board[toCombine[0]];
-    var rc2 = board[toCombine[1]];
-    if(rc1 == rc2) {
-      return true;
-    }
-    else {
-      return false;
-    }
+  var rc1 = board[toCombine[0]];
+  var rc2 = board[toCombine[1]];
+  selected[toCombine[0]] = false;
+  selected[toCombine[1]] = false;
+  toCombine = [];
+  if(rc1 == rc2) {
+    return true;
+  }
+  else {
+    return false;
   }
 }
 function combine() {
@@ -230,4 +232,31 @@ $("#newGame").click(function() {
   convertToRC(randomOrder());
   pairValues();
   displayOnBoard();
+});
+
+$(".box").click(function() {
+  var clicked = $(this).attr("id");
+  if(isSelect.length == 0) {
+    isSelect.push(clicked);
+    selected[clicked] = true;
+  }
+  else if(isSelect.length == 1) {
+    isSelect.push(clicked);
+    selected[clicked] = true;
+    if(testCombine()) {
+
+      alert("Match");
+
+    }
+    else {
+
+      alert("Not Match");
+      
+    }
+  }
+  else if(isSelect.length == 2) {
+    isSelect = [];
+    isSelect.push(clicked);
+    selected[clicked] = true;
+  }
 });
