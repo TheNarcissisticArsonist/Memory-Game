@@ -144,7 +144,6 @@ var selected = {
   rc87: false,
   rc88: false
 }
-var pickTwo = false;
 var toCombine = [];
 
 function randomOrder() {
@@ -231,8 +230,4 @@ $("#newGame").click(function() {
   convertToRC(randomOrder());
   pairValues();
   displayOnBoard();
-});
-
-$(".box").click(function() {
-
 });
