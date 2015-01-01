@@ -218,8 +218,10 @@ function testCombine() {
     if(rc1 == rc2) {
       return true;
     }
+    else {
+      return false;
+    }
   }
-  return false;
 }
 function combine() {
 
@@ -232,5 +234,5 @@ $("#newGame").click(function() {
 });
 
 $(".box").click(function() {
-  
+
 });
