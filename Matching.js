@@ -336,12 +336,12 @@ $(".box").click(function() {
     selected[clicked] = true;
     if(testCombine()) {
 
-      alert("Match");
+      //alert("Match");
 
     }
     else {
 
-      alert("Not Match");
+      //alert("Not Match");
 
     }
   }
@@ -349,5 +349,24 @@ $(".box").click(function() {
     isSelect = [];
     isSelect.push(clicked);
     selected[clicked] = true;
+  }
+  var rc;
+  var win = true;
+  for(i=1; i<=8; i++) {
+    for(j=1; j<=8; j++) {
+      rc = "rc" + String(i) + String(j);
+      if(!matched[rc]) {
+        win = false;
+      }
+    }
+  }
+  var again;
+  if(win) {
+    again = confirm("You win!\nPlay again?");
+    if(again) {
+      convertToRC(randomOrder());
+      pairValues();
+      displayOnBoard();
+    }
   }
 });
