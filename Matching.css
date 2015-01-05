@@ -25,7 +25,7 @@ div#memory {
   text-align: center;
   width: 100px;
   height: 40px;
-  background-color: blue;
+  background-color: #cc33ff;
   display: inline-block;
 }
 div#memory p {
@@ -36,7 +36,7 @@ div#matching {
   text-align: center;
   width: 100px;
   height: 40px;
-  background-color: blue;
+  background-color: #ff33cc;
   display: inline-block;
 }
 div#matching p {
