@@ -220,6 +220,7 @@ var matched = {
 var toCombine = [];
 var isSelect = [];
 var finished = true;
+var mode = "matching" //Other option is "memory"
 
 function randomOrder() {
   var ordered = [];
@@ -365,7 +366,6 @@ $("#newGame").click(function() {
   pairValues();
   displayOnBoard();
 });
-
 $(".box").click(function() {
   var clicked = $(this).attr("id");
   if(matched[clicked]) {
@@ -410,4 +410,10 @@ $(".box").click(function() {
       displayOnBoard();
     }
   }
+});
+$("#memory").click(function() {
+  mode = "memory";
+});
+$("#matching").click(function() {
+  mode = "matching";
 });
