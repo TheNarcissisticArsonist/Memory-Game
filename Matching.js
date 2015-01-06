@@ -286,7 +286,7 @@ function pairValues() {
     }
   }
 }
-function testCombine() {
+function testCombineMatching() {
   if(finished) {
     finished = false;
     setTimeout(function() {
@@ -373,7 +373,7 @@ function boxClickHubMatching(box) {
   else if(isSelect.length == 1) {
     isSelect.push(box);
     selected[box] = true;
-    if(testCombine()) {
+    if(testCombineMatching()) {
       //Can do stuff based on whether it was a match or not
     }
     else {
