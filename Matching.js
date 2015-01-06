@@ -311,6 +311,7 @@ function testCombine() {
         selected[toCombine[0]] = false;
         selected[toCombine[1]] = false;
         toCombine = [];
+        finished = true;
         return true;
       }
       else {
@@ -319,9 +320,9 @@ function testCombine() {
         selected[toCombine[0]] = false;
         selected[toCombine[1]] = false;
         toCombine = [];
+        finished = true;
         return false;
       }
-      finished = true;
     }, 100);
   }
   else {
@@ -383,25 +384,6 @@ function boxClickHubMatching(box) {
     isSelect = [];
     isSelect.push(box);
     selected[box] = true;
-  }
-  var rc;
-  var win = true;
-  for(i=1; i<=8; i++) {
-    for(j=1; j<=8; j++) {
-      rc = "rc" + String(i) + String(j);
-      if(!matched[rc]) {
-        win = false;
-      }
-    }
-  }
-  var again;
-  if(win) {
-    again = confirm("You win!\nPlay again?");
-    if(again) {
-      convertToRC(randomOrder());
-      pairValues();
-      displayOnBoard();
-    }
   }
 }
 function boxClickHubMemory(box) {
