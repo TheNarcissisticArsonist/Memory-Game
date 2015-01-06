@@ -360,25 +360,18 @@ function testCombine() {
     }
   }
 }
-
-$("#newGame").click(function() {
-  convertToRC(randomOrder());
-  pairValues();
-  displayOnBoard();
-});
-$(".box").click(function() {
-  var clicked = $(this).attr("id");
-  if(matched[clicked]) {
+function boxClickHubMatching(box) {
+  if(matched[box]) {
     return;
   }
-  $("#" + clicked).css("background-color", "#9999ff");
+  $("#" + box).css("background-color", "#9999ff");
   if(isSelect.length == 0) {
-    isSelect.push(clicked);
-    selected[clicked] = true;
+    isSelect.push(box);
+    selected[box] = true;
   }
   else if(isSelect.length == 1) {
-    isSelect.push(clicked);
-    selected[clicked] = true;
+    isSelect.push(box);
+    selected[box] = true;
     if(testCombine()) {
       //Can do stuff based on whether it was a match or not
     }
@@ -388,8 +381,8 @@ $(".box").click(function() {
   }
   else if(isSelect.length == 2) {
     isSelect = [];
-    isSelect.push(clicked);
-    selected[clicked] = true;
+    isSelect.push(box);
+    selected[box] = true;
   }
   var rc;
   var win = true;
@@ -409,6 +402,24 @@ $(".box").click(function() {
       pairValues();
       displayOnBoard();
     }
+  }
+}
+function boxClickHubMemory(box) {
+
+}
+
+$("#newGame").click(function() {
+  convertToRC(randomOrder());
+  pairValues();
+  displayOnBoard();
+});
+$(".box").click(function() {
+  var clicked = $(this).attr("id");
+  if(mode == "matching") {
+    boxClickHubMatching(clicked);
+  }
+  else if(mode == "memory") {
+    boxClickHubMemory(clicked);
   }
 });
 $("#memory").click(function() {
