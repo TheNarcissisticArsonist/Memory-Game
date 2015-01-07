@@ -560,10 +560,14 @@ $("#memory").click(function() {
   convertToRC(randomOrder());
   pairValues();
   displayOnBoardMemory();
+  $("#memory").css("border", "2px solid #000000");
+  $("#matching").css("border", "0px");
 });
 $("#matching").click(function() {
   mode = "matching";
   convertToRC(randomOrder());
   pairValues();
   displayOnBoard();
+  $("#matching").css("border", "2px solid #000000");
+  $("#memory").css("border", "0px");
 });
