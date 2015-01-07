@@ -511,9 +511,16 @@ function boxClickHubMemory(box) {
 }
 
 $("#newGame").click(function() {
-  convertToRC(randomOrder());
-  pairValues();
-  displayOnBoard();
+  if(mode == "matching") {
+    convertToRC(randomOrder());
+    pairValues();
+    displayOnBoard();
+  }
+  if(mode == "memory") {
+    convertToRC(randomOrder());
+    pairValues();
+    displayOnBoardMemory();
+  }
 });
 $(".box").click(function() {
   var clicked = $(this).attr("id");
@@ -536,10 +543,15 @@ $(".box").click(function() {
   var again;
   if(win) {
     again = confirm("You win!\nPlay again?");
-    if(again) {
+    if(again && mode == "matching") {
       convertToRC(randomOrder());
       pairValues();
       displayOnBoard();
+    }
+    if(again && mode == "memory") {
+      convertToRC(randomOrder());
+      pairValues();
+      displayOnBoardMemory();
     }
   }
 });
@@ -551,4 +563,7 @@ $("#memory").click(function() {
 });
 $("#matching").click(function() {
   mode = "matching";
+  convertToRC(randomOrder());
+  pairValues();
+  displayOnBoard();
 });
