@@ -523,6 +523,25 @@ $(".box").click(function() {
   else if(mode == "memory") {
     boxClickHubMemory(clicked);
   }
+  var rc;
+  var win = true;
+  for(i=1; i<=8; i++) {
+    for(j=1; j<=8; j++) {
+      rc = "rc" + String(i) + String(j);
+      if(!matched[rc]) {
+        win = false;
+      }
+    }
+  }
+  var again;
+  if(win) {
+    again = confirm("You win!\nPlay again?");
+    if(again) {
+      convertToRC(randomOrder());
+      pairValues();
+      displayOnBoard();
+    }
+  }
 });
 $("#memory").click(function() {
   mode = "memory";
